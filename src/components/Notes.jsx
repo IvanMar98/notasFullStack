@@ -4,7 +4,7 @@ function Notes(props){
     return(
         <div className="note">
             <h1 className="note-title">{title}</h1>
-            <p className="note-date">{fecha}</p>
+            <small className="note-date">{fecha}</small>
             <div className="note-body">
                 {note}
             </div>

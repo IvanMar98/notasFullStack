@@ -1,10 +1,11 @@
-function Nav(){
+import '../assets/styles/nav.css'
+function Nav({addNewNote}){
     return(
-        <div>
+        <div className="nav">
             <ul>
-                <li>Agregar Nota</li>
-                <li>Buscar</li>
-                <li>Menu</li>
+                <li><button>Menu</button></li>
+                <li><button onClick={addNewNote}>Agregar nueva nota</button></li>
+                <li><button>Buscar</button></li>
             </ul>
         </div>
     )

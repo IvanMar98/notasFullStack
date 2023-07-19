@@ -1,0 +1,16 @@
+.nav ul{
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    overflow: hidden;
+    padding: 0;
+}
+.nav ul li a{
+    text-decoration: none;
+    color: black;
+}
+
+button{
+    border: 0;
+    background-color: transparent;
+}
