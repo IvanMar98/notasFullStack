@@ -4,6 +4,7 @@ import TitleSection from './components/TitleSection';
 import Nav from './components/Nav';
 import ContainerNotes from './components/ContainerNotes';
 import FormNewNote from './components/FormNewNote';
+import axios from 'axios';
 
 function App() {
   const [notes, setNotes] = useState([]);
@@ -14,12 +15,22 @@ function App() {
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
-      fetch('https://jsonplaceholder.typicode.com/posts')
+
+      // con fetch
+      /* fetch('https://jsonplaceholder.typicode.com/posts')
         .then((response) => response.json())
         .then((json) => {
           setNotes(json)
           setLoading(false);
+        }) */
+      
+      //con axios
+      axios.get('https://jsonplaceholder.typicode.com/posts')
+        .then((response) => {
+          const { data } = response;
+          setNotes(data);
         })
+
     }, 3000)
   }, []);
 
@@ -34,12 +45,7 @@ function App() {
       "id": 101,
       "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
       "body": newNote
-    }/* {
-      id: notes.length+1,
-      title: 'New Note',
-      fecha: new Date().toISOString(),
-      note: newNote
-    } */
+    }
     setNotes([saveNewNote, ...notes]);
     setShowForm(false);
     setNewNote('')
