@@ -9,8 +9,7 @@ function ContainerNotes({notes}){
                 <Notes 
                 key={note.id}
                 title={note.title}
-                fecha={note.fecha}
-                note={note.note}
+                body={note.body}
                 ></Notes>
             )}
         </div>

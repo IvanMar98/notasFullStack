@@ -4,11 +4,9 @@
     border-radius: 20px;
     padding: 15px;
 }
-.note-title{
-    margin: 0;
-    padding-left: 15px;
-}
-.note-date{
-    margin: 0;
-    padding-left: 15px;
+.note{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 15px;
 }
