@@ -7,10 +7,11 @@
 }
 .nav ul li a{
     text-decoration: none;
-    color: black;
+    
 }
 
 button{
     border: 0;
     background-color: transparent;
+    color: aliceblue;
 }

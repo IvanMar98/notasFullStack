@@ -4,7 +4,8 @@ import TitleSection from './components/TitleSection';
 import Nav from './components/Nav';
 import ContainerNotes from './components/ContainerNotes';
 import FormNewNote from './components/FormNewNote';
-import axios from 'axios';
+import { getAllNotes } from './services/notes/getAllNotes';
+import { postNewNote } from './services/notes/postNote';
 
 function App() {
   const [notes, setNotes] = useState([]);
@@ -25,12 +26,11 @@ function App() {
         }) */
       
       //con axios
-      axios.get('https://jsonplaceholder.typicode.com/posts')
-        .then((response) => {
-          const { data } = response;
-          setNotes(data);
-        })
-
+      getAllNotes()
+        .then((notes) => {
+        setNotes(notes);
+        setLoading(false);
+      })
     }, 3000)
   }, []);
 
@@ -42,13 +42,16 @@ function App() {
     event.preventDefault();
     const saveNewNote = {
       "userId": 1,
-      "id": 101,
       "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
       "body": newNote
     }
-    setNotes([saveNewNote, ...notes]);
-    setShowForm(false);
-    setNewNote('')
+    // hacer un post en la api con axios
+    postNewNote(saveNewNote)
+      .then((noteNew) => {
+        setNotes([noteNew, ...notes]);
+    })
+      setShowForm(false);
+      setNewNote('')
   }
 
   const writingNote = (event) => {

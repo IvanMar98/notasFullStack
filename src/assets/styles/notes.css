@@ -1,5 +1,5 @@
 .note-body{
-    background-color: blueviolet;
+    background-color: #5b5b5b;
     height: 200px;
     border-radius: 20px;
     padding: 15px;
@@ -9,4 +9,10 @@
     flex-wrap: wrap;
     align-items: center;
     padding: 15px;
+}
+.note-title{
+    font-size: large;
+    margin: 0;
+    padding-left: 10px;
+    color: aliceblue;
 }
