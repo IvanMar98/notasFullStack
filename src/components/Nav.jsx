@@ -1,17 +1,15 @@
 import '../assets/styles/nav.css'
 
-function Nav({newNote}){
+function Nav({ title, newNote, handleNotesImportants}){
     return(
         <div className="nav">
             <div>
                 <ul>
-                    <li><button>Menu</button></li>
-                    <li><button onClick={newNote}>Agregar nueva nota</button></li>
-                    <li><button>Buscar</button></li>
+                    <li><button onClick={newNote} className='btn-nav'>Agregar nueva nota</button></li>
+                    <li  onClick={handleNotesImportants}><button className='btn-nav'>{title}</button></li>
                 </ul>
             </div>
         </div>
     )
 }
-
 export default Nav;

@@ -5,13 +5,21 @@
     overflow: hidden;
     padding: 0;
 }
+
+.btn-nav:hover{
+    transform: scale(1.2);
+    color: darkgrey;
+    border-radius: 15px;
+}
 .nav ul li a{
     text-decoration: none;
-    
 }
 
-button{
+.btn-nav{
     border: 0;
     background-color: transparent;
     color: aliceblue;
+    cursor: pointer;
+    margin-bottom: 10px;
+    margin-top: 10px;
 }

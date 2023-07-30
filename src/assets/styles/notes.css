@@ -3,6 +3,7 @@
     height: 200px;
     border-radius: 20px;
     padding: 15px;
+    font-size: xx-large;
 }
 .note{
     display: flex;

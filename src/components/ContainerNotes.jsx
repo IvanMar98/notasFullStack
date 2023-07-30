@@ -8,8 +8,9 @@ function ContainerNotes({notes}){
             : notes.map(note => 
                 <Notes 
                 key={note.id}
-                title={note.title}
-                body={note.body}
+                date={note.date}
+                content={note.content}
+                important = {note.important}
                 ></Notes>
             )}
         </div>

@@ -6,44 +6,32 @@ import ContainerNotes from './components/ContainerNotes';
 import FormNewNote from './components/FormNewNote';
 import { getAllNotes } from './services/notes/getAllNotes';
 import { postNewNote } from './services/notes/postNote';
+import { getNotesImportant } from './services/notes/getNotesImportant';
 
 function App() {
   const [notes, setNotes] = useState([]);
+  const [notesImportants, setNotesImportants] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [newNote, setNewNote] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [important, setImportant] = useState(false);
+  const [showNotesImportants, setShowNotesImportants] = useState(false)
   
   useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-
-      // con fetch
-      /* fetch('https://jsonplaceholder.typicode.com/posts')
-        .then((response) => response.json())
-        .then((json) => {
-          setNotes(json)
-          setLoading(false);
-        }) */
-      
-      //con axios
-      getAllNotes()
-        .then((notes) => {
-        setNotes(notes);
-        setLoading(false);
-      })
-    }, 3000)
+    getAllNotes()
+      .then((notes) => {
+      setNotes(notes);
+    })
   }, []);
 
-  const showFormNewNote = () => {
-      setShowForm(true);
+  const showFormNewNote = (event) => {
+    setShowForm((prevValue) => event? !prevValue: '');
   };
 
   const addNewNote = (event)=> {
     event.preventDefault();
     const saveNewNote = {
-      "userId": 1,
-      "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
-      "body": newNote
+      'content': newNote,
+      'important': important
     }
     // hacer un post en la api con axios
     postNewNote(saveNewNote)
@@ -52,19 +40,45 @@ function App() {
     })
       setShowForm(false);
       setNewNote('')
+      setImportant(false)
   }
 
   const writingNote = (event) => {
     setNewNote(event.target.value);
   }
+
+  const handleImportant = (event) => {
+    setImportant(event.target.checked)
+  }
+
+  const handleShowNotesImportants = (event) =>{
+    setShowNotesImportants((prevValue) => event? !prevValue: '');
+    getNotesImportant()
+      .then((notesImportants) => {
+        setNotesImportants(notesImportants)
+      })
+  }
   return (
     <div className='app'>
-      <TitleSection totalNotes = {notes.length}></TitleSection>
-      <Nav newNote={showFormNewNote}></Nav>
-      {showForm? <FormNewNote addNewNote={addNewNote} inputNote={writingNote} value={newNote}></FormNewNote>: null}
-      <ContainerNotes notes={notes}></ContainerNotes>
-      {loading? <p>Wait a minute, loanding . . . </p>: ''}
-      
+      <TitleSection  
+        title= {showNotesImportants? 'Notas Importantes': 'Todas las Notas'} 
+        totalNotes = {showNotesImportants? notesImportants.length:  notes.length}>  
+      </TitleSection>
+      <Nav 
+        title= {showNotesImportants? 'Ver Todas las Notas': 'Ver notas importantes' } 
+        newNote={showFormNewNote} 
+        handleNotesImportants= {handleShowNotesImportants}>
+      </Nav>
+      {showForm? 
+        <FormNewNote 
+          addNewNote={addNewNote} 
+          inputNote={writingNote} 
+          value={newNote} 
+          important={important} 
+          handleImportant={handleImportant}>  
+        </FormNewNote>: ''
+      }
+      <ContainerNotes notes={showNotesImportants? notesImportants: notes}></ContainerNotes>
     </div>
   )
 }
